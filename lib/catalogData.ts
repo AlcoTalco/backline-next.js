@@ -7,11 +7,11 @@ export interface Product {
   }
   
   export const categories = [
-    { id: 'guitar_amps', name: 'Amplificadores de Guitarra', image: '/images/equipo1.jpeg' },
-    { id: 'bass_amps', name: 'Amplificadores de Bajo', image: '/images/equipo1.png' },
-    { id: 'drums', name: 'Baterías', image: '/images/equipo2.jpeg' },
-    { id: 'keys', name: 'Pianos y Teclados', image: '/images/equipo3.jpeg' },
     { id: 'percussion', name: 'Percusión', image: '/images/percusion_placeholder.jpg' },
+    { id: 'keys', name: 'Pianos y Teclados', image: '/images/equipo3.jpeg' },
+    { id: 'drums', name: 'Baterías', image: '/images/equipo2.jpeg' },
+    { id: 'bass_amps', name: 'Amplificadores de Bajo', image: '/images/equipo1.png' },
+    { id: 'guitar_amps', name: 'Amplificadores de Guitarra', image: '/images/equipo1.jpeg' },
     { id: 'stands', name: 'Accesorios y Soportes', image: '/images/stand_placeholder.jpg' },
   ];
   
