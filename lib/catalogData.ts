@@ -19,25 +19,25 @@ export interface Product {
     // --- Amplificadores de Guitarra ---
     { id: 'amp_vox_ac30', name: 'VOX AC30 Combo 2x12', category: 'guitar_amps', image: '/images/equipo1.jpeg' },
     { id: 'amp_marshall_mg100', name: 'MARSHALL MG100 FX', category: 'guitar_amps', description: 'Cabina 4x12', image: '/images/equipo1.jpeg' },
-    { id: 'amp_fender_hotrod', name: 'Fender Hot Rod Deville', category: 'guitar_amps', image: '/images/equipo1.jpeg' },
+    { id: 'amp_fender_hotrod', name: 'Fender Hot Rod Deville', category: 'guitar_amps', image: '/images/3 (21).jpeg' },
     { id: 'amp_orange', name: 'Amplificador Orange', category: 'guitar_amps', image: '/images/equipo1.jpeg' },
     
     // --- Pianos y Teclados ---
-    { id: 'keys_nord_stage3', name: 'Nord Stage 3 Compact 76', category: 'keys', image: '/images/equipo3.jpeg' },
+    { id: 'keys_nord_stage3', name: 'Nord Stage 3 Compact 76', category: 'keys', image: '/images/nord.jpeg' },
     { id: 'keys_nord_stage4', name: 'Nord Stage 4', category: 'keys', image: '/images/equipo3.jpeg' },
     { id: 'keys_yamaha_montage8', name: 'Yamaha Montage 8', category: 'keys', image: '/images/equipo3.jpeg' },
-    { id: 'keys_yamaha_motif_xf8', name: 'Yamaha MOTIF XF8', category: 'keys', image: '/images/equipo3.jpeg' },
+    { id: 'keys_yamaha_motif_xf8', name: 'Yamaha MOTIF XF8', category: 'keys', image: '/images/3 (31).jpeg' },
     { id: 'keys_yamaha_motif_xs7', name: 'Yamaha MOTIF XS7', category: 'keys', image: '/images/equipo3.jpeg' },
-    { id: 'keys_yamaha_motif_xf6', name: 'Yamaha MOTIF XF6', category: 'keys', image: '/images/equipo3.jpeg' },
+    { id: 'keys_yamaha_motif_xf6', name: 'Yamaha MOTIF XF6', category: 'keys', image: '/images/3 (6).jpeg' },
     { id: 'keys_yamaha_modx8', name: 'Yamaha MODX 8+', category: 'keys', image: '/images/equipo3.jpeg' },
     { id: 'keys_maudio_synth', name: 'Sintetizador MAUDIO', category: 'keys', image: '/images/equipo3.jpeg' },
   
     // --- Amplificadores de Bajo ---
     { id: 'bass_baby_blady', name: 'Baby Bass Blady', category: 'bass_amps', image: '/images/equipo1.png' },
     { id: 'amp_ampeg_stv7', name: 'Ampeg SVT-7 Pro', category: 'bass_amps', image: '/images/equipo1.png' },
-    { id: 'cab_ampeg_4x10', name: 'Cabina Ampeg 4x10', category: 'bass_amps', image: '/images/equipo1.png' },
-    { id: 'amp_ampeg_stv4', name: 'Ampeg SVT-4 Pro', category: 'bass_amps', image: '/images/equipo1.png' },
-    { id: 'cab_ampeg_8x10', name: 'Cabina Ampeg 8x10', category: 'bass_amps', image: '/images/equipo1.png' },
+    { id: 'cab_ampeg_4x10', name: 'Cabina Ampeg 4x10', category: 'bass_amps', image: '/images/3 (28).jpeg' },
+    { id: 'amp_ampeg_stv4', name: 'Ampeg SVT-4 Pro', category: 'bass_amps', image: '/images/3 (19).jpeg' },
+    { id: 'cab_ampeg_8x10', name: 'Cabina Ampeg 8x10', category: 'bass_amps', image: '/images/3 (27).jpeg' },
     { id: 'amp_hartke_1000', name: 'Amplificador Hartke 1000', category: 'bass_amps', image: '/images/equipo1.png' },
     { id: 'amp_hartke_500', name: 'Amplificador Hartke 500', category: 'bass_amps', image: '/images/equipo1.png' },
     { id: 'cab_hartke_4x10', name: 'Cabina Hartke 4x10', category: 'bass_amps', image: '/images/equipo1.png' },
@@ -46,13 +46,13 @@ export interface Product {
   
     // --- Baterías ---
     { id: 'drums_yamaha_sc_nat', name: 'Batería Yamaha Stage Custom', category: 'drums', description: 'Color Natural. Bombo 22”, Toms 10”, 12”, Piso 16”', image: '/images/equipo2.jpeg' },
-    { id: 'drums_yamaha_sc_blk', name: 'Batería Yamaha Stage Custom', category: 'drums', description: 'Color Negro. Bombo 22”, Toms 10”, 12”, Piso 16”', image: '/images/equipo2.jpeg' },
-    { id: 'drums_yamaha_sc_red', name: 'Batería Yamaha Stage Custom', category: 'drums', description: 'Color Rojo. Bombo 22”, Toms 10”, 12”, Piso 16”', image: '/images/equipo2.jpeg' },
-    { id: 'drums_dw_collectors', name: 'Batería DW Collectors', category: 'drums', description: 'Bombo 22”, Toms 10”, 12”, Piso 16”. Sillas hidráulicas (negras, blancas)', image: '/images/equipo2.jpeg' },
+    { id: 'drums_yamaha_sc_blk', name: 'Batería Yamaha Stage Custom', category: 'drums', description: 'Color Wenguen. Bombo 22”, Toms 10”, 12”, Piso 16”', image: '/images/1 (2).jpeg' },
+    { id: 'drums_yamaha_sc_red', name: 'Batería Yamaha Stage Custom', category: 'drums', description: 'Color Rojo. Bombo 22”, Toms 10”, 12”, Piso 16”', image: '/images/5 (13).jpeg' },
+    { id: 'drums_dw_collectors', name: 'Batería DW Collectors', category: 'drums', description: 'Bombo 22”, Toms 10”, 12”, Piso 16”. Sillas hidráulicas (negras, blancas)', image: '/images/5 (6).jpeg' },
   
     // --- Percusión ---
-    { id: 'perc_timbales_lp_tp', name: 'Timbales LP Tito Puente', category: 'percussion', description: 'Profesional Series 14-15. Colores plateado, dorado.', image: '/images/percusion_placeholder.jpg' },
-    { id: 'perc_congas_lp_gh', name: 'Set Congas LP Geovanni Hidalgo', category: 'percussion', image: '/images/percusion_placeholder.jpg' },
+    { id: 'perc_timbales_lp_tp', name: 'Timbales LP Tito Puente', category: 'percussion', description: 'Profesional Series 14-15. Colores plateado, dorado.', image: '/images/1 (5).jpeg' },
+    { id: 'perc_congas_lp_gh', name: 'Set Congas LP Geovanni Hidalgo', category: 'percussion', image: '/images/6 (2).jpeg' },
     { id: 'perc_congas_lp_classic', name: 'Set Congas LP Classic', category: 'percussion', image: '/images/percusion_placeholder.jpg' },
     { id: 'perc_bongo_lp_gh', name: 'Bongo LP Geovanni Hidalgo', category: 'percussion', image: '/images/percusion_placeholder.jpg' },
     { id: 'perc_bongo_lp_classic', name: 'Bongo LP Classic', category: 'percussion', image: '/images/percusion_placeholder.jpg' },

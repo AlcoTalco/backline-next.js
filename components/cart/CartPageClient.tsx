@@ -14,16 +14,13 @@ const CartPageClient = () => {
   return (
     <>
       <div className="container mx-auto px-4 py-16 pt-32">
-        {/* --- SECCIÓN DE TÍTULO Y BÚSQUEDA RESTAURADA Y MEJORADA --- */}
         <div className="mb-16 text-center">
           <h1 className="font-headline text-5xl font-bold uppercase text-white md:text-7xl">
             Catálogo Interactivo
           </h1>
-          {/* Texto instructivo sutil */}
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
             Explora por categoría, haz clic en un producto para ver detalles o usa el botón '+' para añadirlo rápidamente a tu cotización.
           </p>
-          {/* Barra de Búsqueda */}
           <div className="relative mx-auto mt-8 max-w-lg">
             <input
               type="text"
@@ -41,6 +38,7 @@ const CartPageClient = () => {
         {/* Contenedor de todos los carruseles */}
         <div className="space-y-16">
           {categories.map(category => {
+            // 1. Filtramos todos los productos que coinciden
             const filteredProducts = catalog.filter(product => 
               product.category === category.id && 
               product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -49,13 +47,15 @@ const CartPageClient = () => {
             if (filteredProducts.length === 0) return null;
 
             return (
-              <section key={category.id}>
+              // 2. CAMBIO CLAVE: Se añade la clase scroll-mt-24 para el margen del scroll
+              <section key={category.id} id={category.id} className="scroll-mt-24">
                 <div className="mb-4 flex items-baseline justify-between">
                   <h2 className="font-headline text-3xl font-bold">{category.name}</h2>
                   <Link href={`/categoria/${category.id}`} className="text-sm font-bold text-gold hover:underline">
                     Ver más
                   </Link>
                 </div>
+                {/* 3. CAMBIO CLAVE: Pasamos la lista COMPLETA de productos, sin el .slice() */}
                 <HorizontalCarousel>
                   {filteredProducts.map(product => (
                     <ProductCarouselCard key={product.id} product={product} />
