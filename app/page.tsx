@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FadeInSection from "@/components/ui/FadeInSection";
 import FaqSection from "@/components/ui/FaqSection";
+import AnimatedStats from "@/components/ui/AnimatedStats";
 
 export default function HomePage() {
   return (
@@ -21,14 +22,21 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
-      <FadeInSection className="bg-black py-24">
-        <div className="container mx-auto px-4 text-center">
-          <p className="mx-auto max-w-4xl text-xl leading-relaxed text-white/80 md:text-2xl">
+
+      <FadeInSection className="bg-black border-y border-zinc-800">
+        <div className="container mx-auto px-4 py-20 text-center">
+          {/* 1. Primero, los contadores animados */}
+          <AnimatedStats />
+          
+          {/* 2. Luego, el texto de experiencia, con un margen superior */}
+          <p className="mx-auto mt-16 max-w-4xl text-xl leading-relaxed text-white/80 md:text-2xl">
             Somos una empresa con más de 5 años de <span className="font-bold text-gold">experiencia verificada</span> en el servicio de backline para los eventos más exigentes del país.
           </p>
+
+          
         </div>
       </FadeInSection>
+
 
       <FadeInSection id="soluciones" className="bg-black py-32">
         <div className="container mx-auto space-y-24 px-4 md:space-y-32">
