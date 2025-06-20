@@ -16,10 +16,10 @@ const CartPageClient = () => {
       <div className="container mx-auto px-4 py-16 pt-32">
         <div className="mb-16 text-center">
           <h1 className="font-headline text-5xl font-bold uppercase text-white md:text-7xl">
-            Catálogo Interactivo
+            Catálogo 
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
-            Explora por categoría, haz clic en un producto para ver detalles o usa el botón '+' para añadirlo rápidamente a tu cotización.
+            Explora por categoría, haz clic en un producto para ver detalles o usa el botón + para añadirlo rápidamente a tu cotización.
           </p>
           <div className="relative mx-auto mt-8 max-w-lg">
             <input

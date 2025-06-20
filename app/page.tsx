@@ -24,24 +24,21 @@ export default function HomePage() {
       </section>
 
       <FadeInSection className="bg-black border-y border-zinc-800">
-        <div className="container mx-auto px-4 py-24">
-          {/* Usamos Flexbox para controlar el orden */}
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
+        <div className="container mx-auto px-4 py-20">
+          {/* Usamos grid para el layout y gap para el espaciado */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
             {/* Columna Izquierda: El Texto Principal */}
-            {/* 'order-2' lo pone segundo en móvil, 'lg:order-1' lo pone primero en PC */}
-            <div className="text-left w-full lg:order-1 order-2">
+            {/* 'text-center' en móvil, 'lg:text-left' en PC */}
+            <div className="text-center lg:text-left">
               <p className="text-xl leading-relaxed text-white/80">
                 Somos una empresa con más de 5 años de <span className="font-bold text-gold">experiencia verificada</span> en el servicio de backline para los eventos más exigentes del país, garantizando profesionalismo y equipos de la más alta calidad en cada producción.
               </p>
             </div>
 
             {/* Columna Derecha: Las Cifras */}
-            {/* 'order-1' lo pone primero en móvil, 'lg:order-2' lo pone segundo en PC */}
-            <div className="flex items-center gap-8 w-full lg:order-2 order-1">
-              {/* Divisor Vertical Decorativo (solo visible en PC) */}
+            <div className="flex items-center gap-8">
               <div className="w-px h-32 bg-gradient-to-b from-gold/0 via-gold/50 to-gold/0 hidden lg:block"></div>
-              {/* Contadores */}
               <div className="flex-grow">
                 <AnimatedStats />
               </div>
@@ -51,26 +48,36 @@ export default function HomePage() {
         </div>
       </FadeInSection>
 
-
-      <FadeInSection id="soluciones" className="bg-black py-32">
+      <FadeInSection id="soluciones" className="bg-zinc-900 py-32">
         <div className="container mx-auto space-y-24 px-4 md:space-y-32">
+          {/* Título Principal */}
           <div className="text-center">
-            <h2 className="font-headline text-5xl font-bold md:text-6xl">El Éxito de Tu Evento es Nuestro <span className="text-gold">Objetivo.</span></h2>
+            <h2 className="font-headline text-4xl lg:text-5xl font-bold">El Éxito de Tu Evento es <span className="text-gold">Nuestro Objetivo.</span></h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">Sabemos que la presión de una producción es inmensa. Por eso, nuestro servicio de backline de alta gama está diseñado para resolver tus mayores desafíos.</p>
           </div>
+          
+          {/* Subsección 1: FOTO - TEXTO (en todos los tamaños) */}
           <div className="grid items-center gap-8 md:grid-cols-5 md:gap-12">
-            <div className="md:col-span-2"><Image src="/images/rider.jpeg" alt="Rider Técnico" width={500} height={510} className="h-[510px] w-full rounded-lg object-cover shadow-lg" /></div>
-            <div className="text-left md:col-span-3">
-              <h3 className="font-headline mb-4 text-4xl font-bold">El Backline Que Tu Evento Exige.</h3>
+            <div className="md:col-span-2">
+              <Image src="/images/rider.jpeg" alt="Rider Técnico" width={500} height={510} className="h-[510px] w-full rounded-lg object-cover shadow-lg" />
+            </div>
+            <div className="md:col-span-3 text-center md:text-left">
+              <h3 className="font-headline mb-4 text-3xl md:text-4xl font-bold">El Backline Que Tu Evento Exige</h3>
               <p className="text-lg leading-relaxed text-white/70">Entendemos que un rider técnico no es una sugerencia, es una exigencia. Por eso, nuestro inventario incluye las marcas que los artistas demandan. Lo que seleccionas en nuestro catálogo es exactamente lo que recibes.</p>
             </div>
           </div>
+          
+          {/* Subsección 2: FOTO - TEXTO (en móvil), TEXTO - FOTO (en PC) */}
           <div className="grid items-center gap-8 md:grid-cols-5 md:gap-12">
-            <div className="text-left md:col-span-3">
-              <h3 className="font-headline mb-4 text-4xl font-bold">Nuestra Garantía en Tu Escenario</h3>
+            {/* La imagen siempre va primero en el código para que aparezca arriba en móvil */}
+            <div className="md:col-span-2">
+              <Image src="/images/mantenimiento-equipo.jpg" alt="Técnico revisando equipo" width={500} height={510} className="h-[510px] w-full rounded-lg object-cover shadow-lg" />
+            </div>
+            {/* El texto va después, pero le decimos que se ponga primero en PC */}
+            <div className="md:col-span-3 text-center md:text-left md:order-first">
+              <h3 className="font-headline mb-4 text-3xl md:text-4xl font-bold">Nuestra Garantía en Tu Escenario</h3>
               <p className="text-lg leading-relaxed text-white/70">Garantizamos el perfecto funcionamiento de cada equipo. El día del evento, nuestro personal se encarga del montaje completo del backline, dejándolo listo y a tu disposición para la producción.</p>
             </div>
-            <div className="order-first md:col-span-2 md:order-none"><Image src="/images/mantenimiento-equipo.jpg" alt="Técnico revisando equipo" width={500} height={510} className="h-[510px] w-full rounded-lg object-cover shadow-lg" /></div>
           </div>
         </div>
       </FadeInSection>
