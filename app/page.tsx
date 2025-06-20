@@ -24,16 +24,30 @@ export default function HomePage() {
       </section>
 
       <FadeInSection className="bg-black border-y border-zinc-800">
-        <div className="container mx-auto px-4 py-20 text-center">
-          {/* 1. Primero, los contadores animados */}
-          <AnimatedStats />
-          
-          {/* 2. Luego, el texto de experiencia, con un margen superior */}
-          <p className="mx-auto mt-16 max-w-4xl text-xl leading-relaxed text-white/80 md:text-2xl">
-            Somos una empresa con más de 5 años de <span className="font-bold text-gold">experiencia verificada</span> en el servicio de backline para los eventos más exigentes del país.
-          </p>
+        <div className="container mx-auto px-4 py-24">
+          {/* Usamos Flexbox para controlar el orden */}
+          <div className="flex flex-col lg:flex-row gap-16 items-center">
+            
+            {/* Columna Izquierda: El Texto Principal */}
+            {/* 'order-2' lo pone segundo en móvil, 'lg:order-1' lo pone primero en PC */}
+            <div className="text-left w-full lg:order-1 order-2">
+              <p className="text-xl leading-relaxed text-white/80">
+                Somos una empresa con más de 5 años de <span className="font-bold text-gold">experiencia verificada</span> en el servicio de backline para los eventos más exigentes del país, garantizando profesionalismo y equipos de la más alta calidad en cada producción.
+              </p>
+            </div>
 
-          
+            {/* Columna Derecha: Las Cifras */}
+            {/* 'order-1' lo pone primero en móvil, 'lg:order-2' lo pone segundo en PC */}
+            <div className="flex items-center gap-8 w-full lg:order-2 order-1">
+              {/* Divisor Vertical Decorativo (solo visible en PC) */}
+              <div className="w-px h-32 bg-gradient-to-b from-gold/0 via-gold/50 to-gold/0 hidden lg:block"></div>
+              {/* Contadores */}
+              <div className="flex-grow">
+                <AnimatedStats />
+              </div>
+            </div>
+
+          </div>
         </div>
       </FadeInSection>
 
