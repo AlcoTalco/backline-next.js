@@ -5,8 +5,22 @@ import Link from "next/link";
 import FadeInSection from "@/components/ui/FadeInSection";
 import FaqSection from "@/components/ui/FaqSection";
 import AnimatedStats from "@/components/ui/AnimatedStats";
+import SolutionsCarousel from "@/components/ui/SolutionsCarousel"; 
 
 export default function HomePage() {
+  const backlineImages = [
+    { src: '/images/soluciones/backline/primera.jpeg', alt: 'Consola de sonido profesional en un evento' },
+    { src: '/images/soluciones/backline/segunda.jpeg', alt: 'Set de batería DW en escenario' },
+    { src: '/images/soluciones/backline/tercera.jpeg', alt: 'Amplificadores de guitarra Marshall listos para usar' },
+    { src: '/images/soluciones/backline/cuarta.jpeg', alt: 'Técnico ajustando equipos de backline' },
+  ];
+  
+  const garantiaImages = [
+    { src: '/images/soluciones/garantia/primera.jpg', alt: 'Equipo de Backline.com.co montado en escenario' },
+    { src: '/images/soluciones/garantia/segunda.jpeg', alt: 'Detalle de un amplificador Ampeg' },
+    { src: '/images/soluciones/garantia/tercera.jpeg', alt: 'Vista de escenario con equipamiento completo' },
+    { src: '/images/soluciones/garantia/cuarta.jpeg', alt: 'Personal de Backline.com.co trabajando' },
+  ];
   return (
     <>
       <section id="hero" className="relative h-screen overflow-hidden pt-16">
@@ -48,39 +62,44 @@ export default function HomePage() {
         </div>
       </FadeInSection>
 
-      <FadeInSection id="soluciones" className="bg-zinc-900 py-32">
-        <div className="container mx-auto space-y-24 px-4 md:space-y-32">
-          {/* Título Principal */}
-          <div className="text-center">
-            <h2 className="font-headline text-4xl lg:text-5xl font-bold">El Éxito de Tu Evento es <span className="text-gold">Nuestro Objetivo.</span></h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">Sabemos que la presión de una producción es inmensa. Por eso, nuestro servicio de backline de alta gama está diseñado para resolver tus mayores desafíos.</p>
-          </div>
-          
-          {/* Subsección 1: FOTO - TEXTO (en todos los tamaños) */}
-          <div className="grid items-center gap-8 md:grid-cols-5 md:gap-12">
-            <div className="md:col-span-2">
-              <Image src="/images/rider.jpeg" alt="Rider Técnico" width={500} height={510} className="h-[510px] w-full rounded-lg object-cover shadow-lg" />
-            </div>
-            <div className="md:col-span-3 text-center md:text-left">
-              <h3 className="font-headline mb-4 text-3xl md:text-4xl font-bold">El Backline Que Tu Evento Exige</h3>
-              <p className="text-lg leading-relaxed text-white/70">Entendemos que un rider técnico no es una sugerencia, es una exigencia. Por eso, nuestro inventario incluye las marcas que los artistas demandan. Lo que seleccionas en nuestro catálogo es exactamente lo que recibes.</p>
-            </div>
-          </div>
-          
-          {/* Subsección 2: FOTO - TEXTO (en móvil), TEXTO - FOTO (en PC) */}
-          <div className="grid items-center gap-8 md:grid-cols-5 md:gap-12">
-            {/* La imagen siempre va primero en el código para que aparezca arriba en móvil */}
-            <div className="md:col-span-2">
-              <Image src="/images/mantenimiento-equipo.jpg" alt="Técnico revisando equipo" width={500} height={510} className="h-[510px] w-full rounded-lg object-cover shadow-lg" />
-            </div>
-            {/* El texto va después, pero le decimos que se ponga primero en PC */}
-            <div className="md:col-span-3 text-center md:text-left md:order-first">
-              <h3 className="font-headline mb-4 text-3xl md:text-4xl font-bold">Nuestra Garantía en Tu Escenario</h3>
-              <p className="text-lg leading-relaxed text-white/70">Garantizamos el perfecto funcionamiento de cada equipo. El día del evento, nuestro personal se encarga del montaje completo del backline, dejándolo listo y a tu disposición para la producción.</p>
-            </div>
-          </div>
+      <section id="soluciones" className="bg-black py-32 space-y-24 md:space-y-32">
+  <div className="container mx-auto px-4">
+    <div className="text-center">
+      <h2 className="font-headline text-4xl lg:text-5xl font-bold">El Éxito de Tu Evento es <span className="text-gold">Nuestro Objetivo.</span></h2>
+      <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">Sabemos que la presión de una producción es inmensa. Por eso, nuestro servicio de backline de alta gama está diseñado para resolver tus mayores desafíos.</p>
+    </div>
+  </div>
+  
+  {/* PRIMER CONTENEDOR FADE INDIVIDUAL */}
+  <FadeInSection>
+    <div className="container mx-auto px-4">
+      <div className="grid items-center gap-8 md:grid-cols-5 md:gap-12">
+        <div className="md:col-span-2">
+          <SolutionsCarousel images={backlineImages} />
         </div>
-      </FadeInSection>
+        <div className="md:col-span-3 text-center md:text-left">
+          <h3 className="font-headline mb-4 text-3xl md:text-4xl font-bold">El Backline Que Tu Evento Exige</h3>
+          <p className="text-lg leading-relaxed text-white/70">Entendemos que un rider técnico no es una sugerencia, es una exigencia. Por eso, nuestro inventario incluye las marcas que los artistas demandan. Lo que seleccionas en nuestro catálogo es exactamente lo que recibes.</p>
+        </div>
+      </div>
+    </div>
+  </FadeInSection>
+  
+  {/* SEGUNDO CONTENEDOR FADE INDIVIDUAL */}
+  <FadeInSection>
+    <div className="container mx-auto px-4">
+      <div className="grid items-center gap-8 md:grid-cols-5 md:gap-12">
+        <div className="md:col-span-2 md:order-last">
+          <SolutionsCarousel images={garantiaImages} />
+        </div>
+        <div className="md:col-span-3 text-center md:text-left md:order-first">
+          <h3 className="font-headline mb-4 text-3xl md:text-4xl font-bold">Nuestra Garantía en Tu Escenario</h3>
+          <p className="text-lg leading-relaxed text-white/70">Garantizamos el perfecto funcionamiento de cada equipo. El día del evento, nuestro personal se encarga del montaje completo del backline, dejándolo listo y a tu disposición para la producción.</p>
+        </div>
+      </div>
+    </div>
+  </FadeInSection>
+</section>
 
       <FadeInSection id="artists" className="bg-black py-20">
           <div className="container mx-auto px-4">

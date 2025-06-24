@@ -4,9 +4,9 @@ import { useState, useRef, useEffect } from 'react';
 import StatItem from './StatItem';
 
 const stats = [
-  { value: 198, label: 'Eventos Realizados' },
-  { value: 147, label: 'Artistas Nacionales' },
-  { value: 19, label: 'Artistas Internacionales' },
+  { value: 512, label: 'Eventos Realizados' },
+  { value: 347, label: 'Artistas Nacionales' },
+  { value: 53, label: 'Artistas Internacionales' },
   { value: 97, label: 'Ciudades Cubiertas' },
 ];
 
