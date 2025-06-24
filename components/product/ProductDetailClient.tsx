@@ -1,78 +1,136 @@
+// /components/product/ProductDetailClient.tsx
+
 'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
 import { useCart } from '@/hooks/useCart';
-import type { Product } from '@/lib/catalogData';
-import Link from 'next/link';
-import { ArrowLeft } from '@phosphor-icons/react';
+import type { CatalogItem, BaseProduct } from '@/lib/catalogData';
+import { catalog } from '@/lib/catalogData';
+import { CheckCircle, Plus } from '@phosphor-icons/react';
 
-export default function ProductDetailClient({ product }: { product: Product }) {
+export default function ProductDetailClient({ product }: { product: CatalogItem }) {
   const { addToCart } = useCart();
-  const [selectedOptions, setSelectedOptions] = useState<{[key: string]: string}>({});
+  
+  const [selectedComponents, setSelectedComponents] = useState<Set<string>>(
+    new Set(
+      product.type === 'ProductKit' 
+        ? product.components.filter(c => c.isDefault).map(c => c.productId) 
+        : []
+    )
+  );
+  
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
+  const [addedMessage, setAddedMessage] = useState<string | null>(null);
 
-  // Inicializa las opciones seleccionadas con el primer valor por defecto
-  useState(() => {
-    const defaultOptions: {[key: string]: string} = {};
-    if (product.options) {
-      product.options.forEach(opt => {
-        defaultOptions[opt.id] = opt.choices[0];
-      });
-    }
-    setSelectedOptions(defaultOptions);
-  });
-
-  const handleOptionChange = (optionId: string, value: string) => {
-    setSelectedOptions(prev => ({ ...prev, [optionId]: value }));
+  const handleComponentToggle = (productId: string) => {
+    setSelectedComponents(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(productId)) newSet.delete(productId);
+      else newSet.add(productId);
+      return newSet;
+    });
+  };
+  
+  const handleOptionChange = (label: string, productId: string) => {
+    setSelectedOptions(prev => ({ ...prev, [label]: productId }));
   };
 
   const handleAddToCart = () => {
-    const optionsAsArray = product.options 
-      ? product.options.map(opt => ({
-          label: opt.label,
-          value: selectedOptions[opt.id] || opt.choices[0]
-        }))
-      : [];
+    let itemsAddedCount = 0;
+    if (product.type === 'BaseProduct') {
+      addToCart(product, []);
+      itemsAddedCount = 1;
+    } else if (product.type === 'ProductKit') {
+      const componentsToAdd = Array.from(selectedComponents);
+      const optionsToAdd = Object.values(selectedOptions);
+      const allItemIds = [...componentsToAdd, ...optionsToAdd];
+      
+      const items = allItemIds
+        .map(id => catalog.find(item => item.id === id) as BaseProduct)
+        .filter(Boolean);
+
+      items.forEach(item => addToCart(item, []));
+      itemsAddedCount = items.length;
+    }
     
-    addToCart(product, optionsAsArray);
+    setAddedMessage(`${itemsAddedCount} item(s) añadidos a la cotización.`);
+    setTimeout(() => setAddedMessage(null), 3000);
   };
-  
+
+  const isKit = product.type === 'ProductKit';
+
   return (
-    <div className="container mx-auto max-w-5xl px-4 py-16 pt-32">
-       <Link href="/carrito" className="mb-8 inline-flex items-center gap-2 text-gold hover:text-light-gold transition-colors">
-            <ArrowLeft size={20} />
-            Volver al Catálogo
-        </Link>
-      <div className="grid md:grid-cols-2 gap-12 items-start">
-        {/* Columna de Imagen */}
-        <div>
-          <div className="aspect-square relative w-full rounded-lg overflow-hidden border border-zinc-800">
-             <Image src={product.image} alt={product.name} fill className="object-cover" />
-          </div>
+    <div className="container mx-auto px-4 py-16">
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="relative aspect-square w-full h-full min-h-[400px] rounded-lg overflow-hidden border border-zinc-800 shadow-lg">
+          <Image src={product.image} alt={product.name} fill className="object-cover" priority />
         </div>
-        {/* Columna de Detalles */}
+        
         <div className="flex flex-col">
-          <h1 className="font-headline text-4xl lg:text-5xl font-bold">{product.name}</h1>
-          {product.description && <p className="mt-4 text-lg text-white/70">{product.description}</p>}
+          <p className="font-bold uppercase text-gold tracking-widest">{product.subCategory}</p>
+          <h1 className="font-headline text-4xl lg:text-5xl font-bold text-white mb-4">{product.name}</h1>
+          <p className="text-lg text-white/70 mb-8">{product.description}</p>
           
-          {/* Opciones del Producto */}
-          {product.options && (
-            <div className="my-8 space-y-4 border-t border-b border-zinc-800 py-8">
-              {product.options.map(opt => (
-                <div key={opt.id}>
-                  <label htmlFor={opt.id} className="mb-2 block font-bold text-white/90">{opt.label}</label>
-                  <select id={opt.id} onChange={(e) => handleOptionChange(opt.id, e.target.value)} className="form-input text-base">
-                    {opt.choices.map(choice => <option key={choice} value={choice}>{choice}</option>)}
-                  </select>
+          {isKit && (
+            <div className="space-y-8 mb-8 border-t border-zinc-800 pt-8">
+              <div>
+                <h3 className="font-bold text-xl mb-4">Componentes del Kit</h3>
+                <div className="space-y-2">
+                  {product.components.map(comp => {
+                    const compData = catalog.find(p => p.id === comp.productId);
+                    if (!compData) return null;
+                    return (
+                      <label key={comp.productId} className={`flex items-center gap-3 p-3 rounded-md transition-colors duration-200 ${comp.isOptional ? 'cursor-pointer hover:bg-zinc-800' : 'opacity-70'}`}>
+                        <input
+                          type="checkbox"
+                          className="h-5 w-5 rounded bg-zinc-700 border-zinc-600 text-gold focus:ring-gold focus:ring-offset-zinc-900"
+                          checked={selectedComponents.has(comp.productId)}
+                          onChange={() => handleComponentToggle(comp.productId)}
+                          disabled={!comp.isOptional}
+                        />
+                        <span>{compData.name}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {product.configurableOptions?.map(opt => (
+                <div key={opt.label}>
+                  <h3 className="font-bold text-xl mb-4">{opt.label}</h3>
+                  <div className="space-y-2">
+                    {opt.optionIds.map(optId => {
+                      const optData = catalog.find(p => p.id === optId);
+                      if (!optData) return null;
+                      return (
+                        <label key={optId} className="flex items-center gap-3 p-3 rounded-md cursor-pointer hover:bg-zinc-800">
+                          <input
+                            type="radio"
+                            name={opt.label}
+                            value={optId}
+                            onChange={(e) => handleOptionChange(opt.label, e.target.value)}
+                            className="h-5 w-5 bg-zinc-700 border-zinc-600 text-gold focus:ring-gold focus:ring-offset-zinc-900"
+                          />
+                          <span>{optData.name}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
                 </div>
               ))}
             </div>
           )}
-
-          <div className="mt-8">
-            <button onClick={handleAddToCart} className="btn-primary w-full text-center block rounded-md py-4 text-lg">
-              Añadir a Cotización
+          
+          <div className="mt-auto">
+            <button onClick={handleAddToCart} className="btn-primary w-full py-4 text-lg font-bold flex items-center justify-center gap-2">
+              <Plus size={20} weight="bold" /> Añadir a la Cotización
             </button>
+            {addedMessage && (
+              <p className="text-center text-green-400 mt-4 flex items-center justify-center gap-2">
+                <CheckCircle size={20} weight="bold" /> {addedMessage}
+              </p>
+            )}
           </div>
         </div>
       </div>

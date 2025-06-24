@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import type { Product } from '@/lib/catalogData';
-import ProductCarouselCard from './ProductCarouselCard';
+import ProductCarouselCard from '../ProductCarouselCard';
 
 interface CategoryCarouselProps {
   title: string;
