@@ -36,27 +36,54 @@ export interface ProductKit {
 
 export type CatalogItem = BaseProduct | ProductKit;
 
-// --- CATEGORÍAS PRINCIPALES ---
+// ======================================================================
+// == LA NUEVA ARQUITECTURA DE CATEGORÍAS (EL CEREBRO DEL LAYOUT)      ==
+// ======================================================================
 
 export const categories = [
-  // 1. Baterías (Anteriormente 'drums')
-  { id: 'drums', name: 'Baterías' },
-  
-  // 2. Teclados y Pianos
-  { id: 'keys', name: 'Teclados y Pianos' },
-  
-  // 3. Percusión
-  { id: 'percussion', name: 'Percusión' },
-  
-  // 4. Amplificadores y Cabinas
-  { id: 'amps', name: 'Amplificadores y Cabinas' },
-  
-  // 5. Soportes y Accesorios
-  { id: 'stands', name: 'Soportes y Accesorios' },
+  { 
+    id: 'drums', 
+    name: 'Baterías',
+    layout: 'tabs', // Usará la vista de pestañas.
+    tabConfig: {
+      primaryTabs: ['Baterías Completas', 'Platillos'],
+      secondaryActionLabel: '¿Buscas algo específico? Ver Componentes individuales'
+    }
+  },
+  { 
+    id: 'keys', 
+    name: 'Teclados y Pianos',
+    layout: 'tabs', // Usará la vista de pestañas.
+    tabConfig: {
+      primaryTabs: ['Pianos de Escenario', 'Sintetizadores / Workstations'],
+      secondaryActionLabel: 'Ver Soportes de Teclado'
+    }
+  },
+  { 
+    id: 'percussion', 
+    name: 'Percusión',
+    layout: 'grouped' // Usará la vista agrupada por subcategoría.
+  },
+  { 
+    id: 'amps', 
+    name: 'Amplificadores y Cabinas',
+    layout: 'tabs', // Usará la vista de pestañas.
+    tabConfig: {
+      // El orden aquí define el orden de las pestañas en la página.
+      primaryTabs: ['Amplificadores de Bajo', 'Amplificadores de Guitarra'],
+      secondaryActionLabel: 'Ver Componentes y Stacks'
+    }
+  },
+  { 
+    id: 'stands', 
+    name: 'Soportes y Accesorios',
+    layout: 'grouped' // Usará la vista agrupada por subcategoría.
+  },
 ];
 
 
 // --- EL CATÁLOGO COMPLETO ---
+// (Este es tu inventario completo, que se mantiene igual)
 
 export const catalog: CatalogItem[] = [
   //======================================================================
@@ -110,7 +137,7 @@ export const catalog: CatalogItem[] = [
     name: 'Stack Marshall MG100FX',
     brand: 'Marshall',
     category: 'amps',
-    subCategory: 'Amplificadores de Guitarra',
+    subCategory: 'Stacks Completos',
     description: 'Stack completo con cabezal MG100FX y cabina 4x12 a juego.',
     image: '/images/catalogo/amps/marshall-stack.jpg',
     components: [
@@ -162,11 +189,10 @@ export const catalog: CatalogItem[] = [
   {
     type: 'ProductKit',
     id: 'cymbals_zildjian_acustom_set',
-    // CAMBIO DE NOMBRE: De "Set de Platillos" a un nombre más específico si se quiere, o se deja así.
     name: 'Set de Platillos Zildjian A Custom',
     brand: 'Zildjian',
     category: 'drums',
-    subCategory: 'Platillos', // La subcategoría ahora es singular.
+    subCategory: 'Platillos',
     description: 'Set profesional y brillante. Incluye 14" Hi-Hat, 16" Crash, 18" Crash, 21" Ride, y opcionales.',
     image: '/images/catalogo/drums/zildjian-set.jpg',
     components: [
@@ -203,10 +229,10 @@ export const catalog: CatalogItem[] = [
   {
     type: 'ProductKit',
     id: 'drums_yamaha_sc_natural',
-    name: 'Batería Yamaha Stage Custom (Natural)', // CAMBIO DE NOMBRE
+    name: 'Batería Yamaha Stage Custom (Natural)',
     brand: 'Yamaha',
     category: 'drums',
-    subCategory: 'Baterías Completas', // CAMBIO DE SUBCATEGORÍA
+    subCategory: 'Baterías Completas',
     description: 'Kit estándar profesional. Incluye cascos y herrajes básicos. Configura platillos, pedal y silla a tu gusto.',
     image: '/images/catalogo/drums/yamaha-sc-natural.jpeg',
     components: [
@@ -228,26 +254,38 @@ export const catalog: CatalogItem[] = [
   {
     type: 'ProductKit',
     id: 'drums_yamaha_sc_cherry',
-    name: 'Batería Yamaha Stage Custom (Cherry)', // CAMBIO DE NOMBRE
+    name: 'Batería Yamaha Stage Custom (Cherry)',
     brand: 'Yamaha', category: 'drums',
-    subCategory: 'Baterías Completas', // CAMBIO DE SUBCATEGORÍA
-    description: 'Kit estándar profesional...', image: '/images/catalogo/drums/yamaha-sc-cherry.jpeg', components: [ /* ... */ ],
+    subCategory: 'Baterías Completas',
+    description: 'Kit estándar profesional...', image: '/images/catalogo/drums/yamaha-sc-cherry.jpeg', 
+    components: [
+      { productId: 'drum_yamaha_sc_kick22', isDefault: true, isOptional: false },
+      { productId: 'drum_yamaha_sc_tom10', isDefault: true, isOptional: true },
+      { productId: 'drum_yamaha_sc_tom12', isDefault: true, isOptional: true },
+      { productId: 'drum_yamaha_sc_floor14', isDefault: true, isOptional: true },
+    ],
   },
   {
     type: 'ProductKit',
     id: 'drums_yamaha_sc_black',
-    name: 'Batería Yamaha Stage Custom (Negra)', // CAMBIO DE NOMBRE
+    name: 'Batería Yamaha Stage Custom (Negra)',
     brand: 'Yamaha', category: 'drums',
-    subCategory: 'Baterías Completas', // CAMBIO DE SUBCATEGORÍA
-    description: 'Kit estándar profesional...', image: '/images/catalogo/drums/yamaha-sc-black.jpeg', components: [ /* ... */ ],
+    subCategory: 'Baterías Completas',
+    description: 'Kit estándar profesional...', image: '/images/catalogo/drums/yamaha-sc-black.jpeg', 
+    components: [
+      { productId: 'drum_yamaha_sc_kick22', isDefault: true, isOptional: false },
+      { productId: 'drum_yamaha_sc_tom10', isDefault: true, isOptional: true },
+      { productId: 'drum_yamaha_sc_tom12', isDefault: true, isOptional: true },
+      { productId: 'drum_yamaha_sc_floor16', isDefault: true, isOptional: true },
+    ],
   },
   {
     type: 'ProductKit',
     id: 'drums_dw_collector',
-    name: 'Batería DW Collector', // CAMBIO DE NOMBRE
+    name: 'Batería DW Collector',
     brand: 'DW',
     category: 'drums',
-    subCategory: 'Baterías Completas', // CAMBIO DE SUBCATEGORÍA
+    subCategory: 'Baterías Completas',
     description: 'Kit de alta gama para el sonido más exigente. Incluye cascos y herrajes DW...',
     image: '/images/catalogo/drums/dw-collector.jpeg',
     components: [

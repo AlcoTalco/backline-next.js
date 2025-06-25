@@ -20,12 +20,12 @@ export default function CategoryPage({ params }: { params: { categoryId: string 
 
   if (!category) notFound();
 
-  // En esta página SÍ traemos TODOS los productos de la categoría
   const productsInCategory = catalog.filter(item => item.category === categoryId);
 
   return (
+    // Pasamos el objeto de categoría completo
     <CategoryPageClient 
-      categoryName={category.name} 
+      category={category} 
       products={productsInCategory} 
     />
   );
